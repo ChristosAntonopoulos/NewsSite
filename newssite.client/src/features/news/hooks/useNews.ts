@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { NewsItem, Category, Topic, PagedResult } from '../types'
+import { PagedResult } from '../types'
+import { Article, Category, Topic } from '../../../types/Article'
 import { newsApi } from '../api/newsApi'
 import { useLanguage } from '../../../contexts/LanguageContext'
 
 export const useNews = () => {
-  const [news, setNews] = useState<PagedResult<NewsItem>>()
+  const [news, setNews] = useState<PagedResult<Article>>()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<Error | null>(null)
   const [page, setPage] = useState(1)

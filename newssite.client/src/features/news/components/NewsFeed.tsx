@@ -13,6 +13,13 @@ interface NewsFeedProps {
   mode?: 'all' | 'saved';
 }
 
+interface NewsData {
+  items: Article[];
+  totalItems: number;
+  page: number;
+  pageSize: number;
+}
+
 const NewsFeed: React.FC<NewsFeedProps> = ({ mode = 'all' }) => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -53,13 +60,12 @@ const NewsFeed: React.FC<NewsFeedProps> = ({ mode = 'all' }) => {
       setLoading(true);
     }
     try {
-      let data;
+      let data: NewsData;
       if (mode === 'saved') {
         if (savedArticleIds.length === 0) {
           data = { items: [], totalItems: 0, page: 1, pageSize: 12 };
         } else {
-          const response = await newsApi.getSavedArticles(savedArticleIds, pageNum, 12);
-          data = response;
+          data = await newsApi.getSavedArticles(savedArticleIds, pageNum, 12);
         }
       } else {
         data = await newsApi.getNews(pageNum, 12, selectedCategory || undefined);

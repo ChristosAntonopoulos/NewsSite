@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Layout } from './shared/components/Layout/Layout';
-import { NewsFeed } from './features/news/components/NewsFeed';
+import NewsFeed from './features/news/components/NewsFeed';
 import { ErrorBoundary } from './shared/components/ErrorBoundary';
 
 export const router = createBrowserRouter([
