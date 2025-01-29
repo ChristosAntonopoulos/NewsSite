@@ -21,6 +21,10 @@ export default defineConfig({
             '/api-docs': {
                 target: process.env.VITE_API_URL || 'http://localhost:5000',
                 changeOrigin: true
+            },
+            '/images': {
+                target: process.env.VITE_API_URL || 'http://localhost:5000',
+                changeOrigin: true
             }
         },
         port: 5173
