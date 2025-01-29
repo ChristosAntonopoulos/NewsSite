@@ -15,6 +15,8 @@ services:
       - "5000:80"
     networks:
       - newssite-network
+    volumes:
+      - newssite_images:/app/wwwroot/images
     restart: unless-stopped
 
   frontend:
@@ -36,4 +38,5 @@ networks:
     driver: bridge
 
 volumes:
-  mongodb_data: 
+  mongodb_data:
+  newssite_images: 
