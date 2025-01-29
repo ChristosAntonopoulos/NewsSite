@@ -1,0 +1,74 @@
+{
+    "id": "news_category_pipeline",
+    "name": "News Category Pipeline",
+    "description": "Fetches news by category, extracts keywords, and performs related searches",
+    "mode": "Sequential",
+    "steps": [
+        {
+            "id": "initial_search",
+            "name": "Initial Category Search",
+            "type": "serp.search",
+            "order": 0,
+            "parameters": {
+                "query": "{{category}} news",
+                "engine": "google",
+                "maxResults": "20",
+                "tbm": "nws",
+                "outputPath": "initial_results"
+            }
+        },
+        {
+            "id": "extract_keywords",
+            "name": "Extract Keywords",
+            "type": "openai.completion",
+            "order": 1,
+            "parameters": {
+                "query": "Extract 3-5 key topics or themes from this news article. Format as comma-separated list. Title: {{initial_results[*].title}} Summary: {{initial_results[*].snippet}}",
+                "model": "gpt-3.5-turbo-instruct",
+                "maxTokens": 100,
+                "temperature": 0.3,
+                "outputPath": "keywords_results"
+            }
+        },
+        {
+            "id": "related_searches",
+            "name": "Related News Searches",
+            "type": "serp.search",
+            "order": 2,
+            "parameters": {
+                "query": "{{keywords_results[*].text}}",
+                "engine": "google",
+                "maxResults": "5",
+                "tbm": "nws",
+                "outputPath": "related_results"
+            }
+        }
+    ],
+    "inputSchema": {
+        "type": "object",
+        "properties": {
+            "category": {
+                "type": "string",
+                "description": "News category to search for"
+            }
+        },
+        "required": ["category"]
+    },
+    "outputSchema": {
+        "type": "object",
+        "properties": {
+            "initial_results": {
+                "type": "array",
+                "description": "Initial news search results"
+            },
+            "keywords_results": {
+                "type": "array",
+                "description": "Extracted keywords for each article"
+            },
+            "related_results": {
+                "type": "array",
+                "description": "Related news articles based on keywords"
+            }
+        }
+    }
+} 

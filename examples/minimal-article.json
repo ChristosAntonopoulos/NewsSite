@@ -1,0 +1,48 @@
+{
+  "title": {
+    "english": "Sample Article Title",
+    "greek": "Δείγμα Τίτλου Άρθρου"
+  },
+  "summary": {
+    "english": "This is a sample article summary.",
+    "greek": "Αυτή είναι μια περίληψη δείγματος άρθρου."
+  },
+  "content": {
+    "english": "This is the main content of the sample article.",
+    "greek": "Αυτό είναι το κύριο περιεχόμενο του δείγματος άρθρου."
+  },
+  "featuredImage": "https://example.com/sample-image.jpg",
+  "categoryId": "cat-001",
+  "category": {
+    "id": "cat-001",
+    "name": {
+      "english": "Sample Category",
+      "greek": "Δείγμα Κατηγορίας"
+    },
+    "description": {
+      "english": "Sample category description",
+      "greek": "Περιγραφή δείγματος κατηγορίας"
+    },
+    "slug": {
+      "english": "sample-category",
+      "greek": "deigma-katigorias"
+    }
+  },
+  "topicId": "topic-001",
+  "topic": {
+    "id": "topic-001",
+    "name": {
+      "english": "Sample Topic",
+      "greek": "Δείγμα Θέματος"
+    },
+    "description": {
+      "english": "Sample topic description",
+      "greek": "Περιγραφή δείγματος θέματος"
+    },
+    "slug": {
+      "english": "sample-topic",
+      "greek": "deigma-thematos"
+    },
+    "categoryId": "cat-001"
+  }
+} 
