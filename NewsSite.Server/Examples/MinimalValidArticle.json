@@ -1,0 +1,65 @@
+{
+  "id": "article-001",
+  "createdAt": "2024-01-23T15:30:00Z",
+  "updatedAt": "2024-01-23T15:30:00Z",
+  "title": {
+    "en": "Sample Article Title",
+    "el": "Δείγμα Τίτλου Άρθρου"
+  },
+  "summary": {
+    "en": "This is a sample article summary.",
+    "el": "Αυτή είναι μια περίληψη δείγματος άρθρου."
+  },
+  "verifiedFacts": [],
+  "sourceCount": 0,
+  "sources": [],
+  "featuredImage": "https://example.com/sample-image.jpg",
+  "version": 1,
+  "wordCount": {
+    "en": 50,
+    "el": 45
+  },
+  "metadata": {},
+  "content": {
+    "en": "This is the main content of the sample article.",
+    "el": "Αυτό είναι το κύριο περιεχόμενο του δείγματος άρθρου."
+  },
+  "url": {
+    "en": "https://example.com/articles/sample-article",
+    "el": "https://example.com/el/articles/sample-article"
+  },
+  "publishedAt": "2024-01-23T15:30:00Z",
+  "categoryId": "cat-001",
+  "category": {
+    "id": "cat-001",
+    "name": {
+      "en": "Sample Category",
+      "el": "Δείγμα Κατηγορίας"
+    },
+    "description": {
+      "en": "This is a sample category description.",
+      "el": "Αυτή είναι μια περιγραφή δείγματος κατηγορίας."
+    },
+    "slug": {
+      "en": "sample-category",
+      "el": "deigma-katigorias"
+    }
+  },
+  "topicId": "topic-001",
+  "topic": {
+    "id": "topic-001",
+    "name": {
+      "en": "Sample Topic",
+      "el": "Δείγμα Θέματος"
+    },
+    "description": {
+      "en": "This is a sample topic description.",
+      "el": "Αυτή είναι μια περιγραφή δείγματος θέματος."
+    },
+    "slug": {
+      "en": "sample-topic",
+      "el": "deigma-thematos"
+    },
+    "categoryId": "cat-001"
+  }
+} 

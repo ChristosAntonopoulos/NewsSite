@@ -1,0 +1,66 @@
+{
+    "name": "Expanded Tech News Pipeline",
+    "description": "Fetches initial tech news results and expands each with detailed sub-searches",
+    "isEnabled": true,
+    "mode": "Sequential",
+    "steps": [
+        {
+            "id": "initial-search",
+            "name": "Initial Tech News Search",
+            "type": "serp.search",
+            "order": 0,
+            "enabled": true,
+            "parameters": {
+                "query": "latest technology news",
+                "engine": "google_news",
+                "maxResults": 10,
+                "includeImages": false
+            }
+        },
+        {
+            "id": "query-expansion",
+            "name": "Expand Search Topics",
+            "type": "openai.completion",
+            "order": 1,
+            "enabled": true,
+            "parameters": {
+                "model": "gpt-4",
+                "temperature": 0.7,
+                "maxTokens": 1000,
+                "systemPrompt": "You are a search query expansion expert. For each news result, generate 2 specific sub-queries that would help gather more detailed information about different aspects of the topic. Format your response as a JSON array of objects, where each object has a 'title' field (the original article title) and a 'queries' field (array of generated sub-queries).",
+                "inputField": "data",
+                "outputFormat": "json"
+            }
+        },
+        {
+            "id": "detailed-searches",
+            "name": "Detailed Sub-Searches",
+            "type": "serp.search",
+            "order": 2,
+            "enabled": true,
+            "parameters": {
+                "query": "{{data.news_results[*].title}}",
+                "engine": "google_news",
+                "maxResults": 5,
+                "includeImages": false
+            },
+            "transformations": [
+                {
+                    "field": "results",
+                    "operation": "merge",
+                    "config": {
+                        "groupBy": "originalQuery"
+                    }
+                }
+            ]
+        }
+    ],
+    "retryPolicy": {
+        "maxRetries": 3,
+        "initialDelay": "00:00:01",
+        "exponentialBackoff": true
+    },
+    "metadata": {
+        "description": "This pipeline first fetches 10 main tech news articles, then uses GPT to generate specific sub-queries for each article, and finally performs detailed searches for each sub-query."
+    }
+} 

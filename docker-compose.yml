@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:80
+      - MongoDB__ConnectionString=mongodb+srv://bot:xVVV8B1RWhk7Q4V8@newssite.bngjy.mongodb.net/?retryWrites=true&w=majority&appName=NewsSite
+      - MongoDB__DatabaseName=NewsSiteDb
+      - ASPNETCORE_HTTP_PORTS=80
+    ports:
+      - "5000:80"
+    networks:
+      - newssite-network
+    volumes:
+      - newssite_images:/app/wwwroot/images
+    restart: unless-stopped
+
+  frontend:
+    build: 
+      context: ./newssite.client
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+    depends_on:
+      - backend
+    networks:
+      - newssite-network
+    restart: unless-stopped
+
+networks:
+  newssite-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  newssite_images: 

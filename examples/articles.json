@@ -1,0 +1,113 @@
+{
+  "id": "article-001",
+  "createdAt": "2024-01-23T10:30:00.000Z",
+  "updatedAt": "2024-01-23T10:30:00.000Z",
+  "title": {
+    "en": "AI Breakthrough: New Model Achieves Human-Level Understanding in Scientific Research",
+    "el": "Επίτευγμα στην ΤΝ: Νέο Μοντέλο Επιτυγχάνει Ανθρώπινο Επίπεδο Κατανόησης στην Επιστημονική Έρευνα"
+  },
+  "summary": {
+    "en": "Researchers have developed a groundbreaking AI model that demonstrates unprecedented comprehension of scientific literature, marking a significant milestone in artificial intelligence development.",
+    "el": "Ερευνητές ανέπτυξαν ένα πρωτοποριακό μοντέλο ΤΝ που επιδεικνύει πρωτοφανή κατανόηση της επιστημονικής βιβλιογραφίας, σηματοδοτώντας ένα σημαντικό ορόσημο στην ανάπτυξη της τεχνητής νοημοσύνης."
+  },
+  "verifiedFacts": [
+    {
+      "fact": {
+        "en": "The new AI model achieved 95% accuracy in scientific paper comprehension tests",
+        "el": "Το νέο μοντέλο ΤΝ πέτυχε 95% ακρίβεια στα τεστ κατανόησης επιστημονικών εργασιών"
+      },
+      "confidence": 95,
+      "sources": [
+        {
+          "title": {
+            "en": "Nature: AI Research Quarterly",
+            "el": "Nature: Τριμηνιαία Έκδοση Έρευνας ΤΝ"
+          },
+          "url": "https://nature.com/ai-research/2024/breakthrough"
+        }
+      ],
+      "attribution": {
+        "en": "Stanford AI Research Team",
+        "el": "Ερευνητική Ομάδα ΤΝ του Stanford"
+      }
+    }
+  ],
+  "sourceCount": 3,
+  "sources": [
+    {
+      "title": {
+        "en": "Stanford Research Publication",
+        "el": "Δημοσίευση Έρευνας Stanford"
+      },
+      "url": "https://stanford.edu/research/ai-breakthrough"
+    }
+  ],
+  "featuredImage": "https://example.com/images/ai-research.jpg",
+  "version": 1,
+  "wordCount": {
+    "en": 1200,
+    "el": 1350
+  },
+  "metadata": {
+    "author": "Dr. Sarah Johnson",
+    "readingTime": "6 minutes",
+    "tags": "AI,Research,Technology"
+  },
+  "content": {
+    "en": "In a groundbreaking development, researchers at Stanford University have unveiled a new artificial intelligence model that demonstrates unprecedented capabilities in understanding and analyzing scientific research papers.",
+    "el": "Σε μια πρωτοποριακή εξέλιξη, ερευνητές του Πανεπιστημίου Stanford παρουσίασαν ένα νέο μοντέλο τεχνητής νοημοσύνης που επιδεικνύει πρωτοφανείς δυνατότητες."
+  },
+  "url": {
+    "en": "ai-breakthrough-new-model-achieves-human-level-understanding",
+    "el": "epiteugma-stin-texniti-noimosini-neo-montelo"
+  },
+  "publishedAt": "2024-01-23T10:00:00.000Z",
+  "categoryId": "cat-001",
+  "category": {
+    "id": "cat-001",
+    "name": {
+      "en": "Technology",
+      "el": "Τεχνολογία"
+    },
+    "description": {
+      "en": "Latest developments in technology and innovation",
+      "el": "Τελευταίες εξελίξεις στην τεχνολογία και την καινοτομία"
+    },
+    "slug": {
+      "en": "technology",
+      "el": "technologia"
+    }
+  },
+  "topicId": "topic-001",
+  "topic": {
+    "id": "topic-001",
+    "name": {
+      "en": "Artificial Intelligence",
+      "el": "Τεχνητή Νοημοσύνη"
+    },
+    "description": {
+      "en": "News and developments in AI and machine learning",
+      "el": "Ειδήσεις και εξελίξεις στην ΤΝ και τη μηχανική μάθηση"
+    },
+    "slug": {
+      "en": "artificial-intelligence",
+      "el": "texniti-noimosini"
+    },
+    "categoryId": "cat-001",
+    "category": {
+      "id": "cat-001",
+      "name": {
+        "en": "Technology",
+        "el": "Τεχνολογία"
+      },
+      "description": {
+        "en": "Latest developments in technology and innovation",
+        "el": "Τελευταίες εξελίξεις στην τεχνολογία και την καινοτομία"
+      },
+      "slug": {
+        "en": "technology",
+        "el": "technologia"
+      }
+    }
+  }
+} 

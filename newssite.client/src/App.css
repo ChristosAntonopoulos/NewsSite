@@ -1,0 +1,33 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.loader {
+  @apply flex justify-center items-center min-h-screen text-lg text-gray-600 dark:text-gray-300;
+}
+
+.theme-btn {
+  @apply p-2 rounded-full text-gray-300 hover:bg-gray-700 hover:text-white;
+}
+
+.theme-menu {
+  @apply absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5;
+}
+
+.theme-option {
+  @apply block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700;
+}
+  

@@ -1,0 +1,48 @@
+newssite.client/src/
+├── features/
+│   ├── news/
+│   │   ├── components/
+│   │   │   ├── NewsFeed.tsx
+│   │   │   └── NewsCard.tsx
+│   │   ├── services/
+│   │   │   └── newsService.ts
+│   │   ├── types/
+│   │   │   └── news.types.ts
+│   │   └── hooks/
+│   │       └── useNews.ts
+│   ├── pipelines/
+│   │   ├── components/
+│   │   │   ├── PipelineCard.tsx
+│   │   │   └── StepEditor.tsx
+│   │   ├── pages/
+│   │   │   └── PipelineList.tsx
+│   │   ├── services/
+│   │   │   └── pipelineService.ts
+│   │   └── types/
+│   │       └── pipeline.types.ts
+│   └── crypto/
+│       ├── services/
+│       │   └── cryptoApi.ts
+│       └── types/
+│           └── crypto.types.ts
+├── shared/
+│   ├── components/
+│   │   ├── Layout/
+│   │   │   ├── Layout.tsx
+│   │   │   └── Header.tsx
+│   │   └── LanguageSwitcher/
+│   │       └── LanguageSwitcher.tsx
+│   ├── services/
+│   │   └── api.ts
+│   ├── utils/
+│   │   ├── translationLoader.ts
+│   │   └── formatters.ts
+│   ├── hooks/
+│   │   └── useTranslation.ts
+│   └── types/
+│       └── common.types.ts
+├── styles/
+│   ├── global.css
+│   └── variables.css
+└── config/
+    └── constants.ts 

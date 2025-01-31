@@ -1,0 +1,258 @@
+{
+  "common.siteTitle": {
+    "en": "NewsSite",
+    "el": "NewsSite"
+  },
+  "common.newsFeed": {
+    "en": "News Feed",
+    "el": "Ροή Ειδήσεων"
+  },
+  "common.savedArticles": {
+    "en": "Saved Articles",
+    "el": "Αποθηκευμένα Άρθρα"
+  },
+  "common.preferences": {
+    "en": "Preferences",
+    "el": "Προτιμήσεις"
+  },
+  "common.pipelines": {
+    "en": "Pipelines",
+    "el": "Ροές Εργασίας"
+  },
+  "common.login": {
+    "en": "Login",
+    "el": "Σύνδεση"
+  },
+  "common.signUp": {
+    "en": "Sign Up",
+    "el": "Εγγραφή"
+  },
+  "common.footer": {
+    "en": "© 2024 NewsSite. All rights reserved.",
+    "el": "© 2024 NewsSite. Με επιφύλαξη παντός δικαιώματος."
+  },
+  "common.loading": {
+    "en": "Loading...",
+    "el": "Φόρτωση..."
+  },
+  "common.error": {
+    "en": "Error",
+    "el": "Σφάλμα"
+  },
+  "common.darkMode": {
+    "en": "Dark Mode",
+    "el": "Σκοτεινή Λειτουργία"
+  },
+  "common.lightMode": {
+    "en": "Light Mode",
+    "el": "Φωτεινή Λειτουργία"
+  },
+  "news.trendingTopics": {
+    "en": "Trending Topics",
+    "el": "Δημοφιλή Θέματα"
+  },
+  "news.filters": {
+    "en": "Filters",
+    "el": "Φίλτρα"
+  },
+  "news.allCategories": {
+    "en": "All Categories",
+    "el": "Όλες οι Κατηγορίες"
+  },
+  "news.refreshing": {
+    "en": "Refreshing...",
+    "el": "Ανανέωση..."
+  },
+  "news.refreshNews": {
+    "en": "Refresh News",
+    "el": "Ανανέωση Ειδήσεων"
+  },
+  "news.saveArticle": {
+    "en": "Save Article",
+    "el": "Αποθήκευση Άρθρου"
+  },
+  "news.sources": {
+    "en": "Sources",
+    "el": "Πηγές"
+  },
+  "news.keyFacts": {
+    "en": "Key Facts",
+    "el": "Βασικά Σημεία"
+  },
+  "news.confidence": {
+    "en": "Confidence",
+    "el": "Αξιοπιστία"
+  },
+  "news.categories": {
+    "en": "Categories",
+    "el": "Κατηγορίες"
+  },
+  "news.noArticlesFound": {
+    "en": "No articles found for this category",
+    "el": "Δεν βρέθηκαν άρθρα για αυτή την κατηγορία"
+  },
+  "news.errorLoadingArticles": {
+    "en": "Failed to load articles",
+    "el": "Αποτυχία φόρτωσης άρθρων"
+  },
+  "news.errorLoadingCategories": {
+    "en": "Failed to load categories",
+    "el": "Αποτυχία φόρτωσης κατηγοριών"
+  },
+  "news.readMore": {
+    "en": "Read More",
+    "el": "Διαβάστε Περισσότερα"
+  },
+  "news.publishedOn": {
+    "en": "Published on",
+    "el": "Δημοσιεύτηκε στις"
+  },
+  "news.by": {
+    "en": "by",
+    "el": "από"
+  },
+  "news.showFacts": {
+    "en": "Show Facts",
+    "el": "Εμφάνιση Γεγονότων"
+  },
+  "news.hideFacts": {
+    "en": "Hide Facts",
+    "el": "Απόκρυψη Γεγονότων"
+  },
+  "news.factConfidence": {
+    "en": "Confidence Level",
+    "el": "Επίπεδο Αξιοπιστίας"
+  },
+  "news.loadMore": {
+    "en": "Load More",
+    "el": "Φόρτωση Περισσότερων"
+  },
+  "news.comments": {
+    "en": "Comments",
+    "el": "Σχόλια"
+  },
+  "news.share": {
+    "en": "Share",
+    "el": "Κοινοποίηση"
+  },
+  "news.save": {
+    "en": "Save",
+    "el": "Αποθήκευση"
+  },
+  "news.saved": {
+    "en": "Saved",
+    "el": "Αποθηκεύτηκε"
+  },
+  "news.showMore": {
+    "en": "Show More",
+    "el": "Περισσότερα"
+  },
+  "news.showLess": {
+    "en": "Show Less",
+    "el": "Λιγότερα"
+  },
+  "layout.trending.twitterTitle": {
+    "en": "Popular in Twitter",
+    "el": "Δημοφιλές στο Twitter"
+  },
+  "layout.trending.redditTitle": {
+    "en": "Popular in Reddit",
+    "el": "Δημοφιλές στο Reddit"
+  },
+  "auth.login.title": {
+    "en": "Sign In",
+    "el": "Σύνδεση"
+  },
+  "auth.login.email": {
+    "en": "Email Address",
+    "el": "Διεύθυνση Email"
+  },
+  "auth.login.password": {
+    "en": "Password",
+    "el": "Κωδικός"
+  },
+  "auth.login.submit": {
+    "en": "Sign In",
+    "el": "Σύνδεση"
+  },
+  "auth.login.googleButton": {
+    "en": "Continue with Google",
+    "el": "Συνέχεια με Google"
+  },
+  "auth.login.redditButton": {
+    "en": "Continue with Reddit",
+    "el": "Συνέχεια με Reddit"
+  },
+  "auth.login.orDivider": {
+    "en": "or",
+    "el": "ή"
+  },
+  "auth.login.registerLink": {
+    "en": "Don't have an account? Sign up",
+    "el": "Δεν έχετε λογαριασμό; Εγγραφείτε"
+  },
+  "auth.login.errors.DEFAULT": {
+    "en": "Failed to sign in. Please check your credentials and try again.",
+    "el": "Αποτυχία σύνδεσης. Παρακαλώ ελέγξτε τα στοιχεία σας και δοκιμάστε ξανά."
+  },
+  "auth.register.title": {
+    "en": "Create Account",
+    "el": "Δημιουργία Λογαριασμού"
+  },
+  "auth.register.name": {
+    "en": "Full Name",
+    "el": "Ονοματεπώνυμο"
+  },
+  "auth.register.email": {
+    "en": "Email Address",
+    "el": "Διεύθυνση Email"
+  },
+  "auth.register.password": {
+    "en": "Password",
+    "el": "Κωδικός"
+  },
+  "auth.register.submit": {
+    "en": "Create Account",
+    "el": "Δημιουργία Λογαριασμού"
+  },
+  "auth.register.googleButton": {
+    "en": "Continue with Google",
+    "el": "Συνέχεια με Google"
+  },
+  "auth.register.redditButton": {
+    "en": "Continue with Reddit",
+    "el": "Συνέχεια με Reddit"
+  },
+  "auth.register.orDivider": {
+    "en": "or",
+    "el": "ή"
+  },
+  "auth.register.loginLink": {
+    "en": "Already have an account? Sign in",
+    "el": "Έχετε ήδη λογαριασμό; Συνδεθείτε"
+  },
+  "auth.register.errors.DEFAULT": {
+    "en": "Failed to create account. Please try again.",
+    "el": "Αποτυχία δημιουργίας λογαριασμού. Παρακαλώ δοκιμάστε ξανά."
+  },
+  "auth.register.errors.EMAIL_EXISTS": {
+    "en": "An account with this email already exists.",
+    "el": "Υπάρχει ήδη λογαριασμός με αυτό το email."
+  },
+  "auth.register.errors.INVALID_EMAIL": {
+    "en": "Please enter a valid email address.",
+    "el": "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση email."
+  },
+  "common.welcome": {
+      "en": "Welcome",
+      "el": "Καλωσήρθατε"
+  },
+  "auth.register.errors.WEAK_PASSWORD": {
+    "en": "Password is too weak. Please use at least 8 characters including numbers and special characters.",
+    "el": "Ο κωδικός είναι πολύ αδύναμος. Παρακαλώ χρησιμοποιήστε τουλάχιστον 8 χαρακτήρες συμπεριλαμβανομένων αριθμών και ειδικών χαρακτήρων."
+  },
+  "common.logout": {
+    "en": "Logout",
+    "el": "Αποσύνδεση"
+  }
+} 
