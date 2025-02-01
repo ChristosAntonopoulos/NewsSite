@@ -1,0 +1,8 @@
+{
+  "news": {
+    "sources": "sources",
+    "relatedSources": "Related Sources",
+    "sourcesDescription": "This story has been covered by multiple news outlets. Here are related articles from different sources:",
+    "visitSource": "Visit Source"
+  }
+} 

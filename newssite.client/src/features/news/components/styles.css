@@ -1,0 +1,60 @@
+.news-card-sources {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.sources-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.sources-button:hover {
+  color: var(--primary-main);
+  background-color: var(--primary-light);
+}
+
+.sources-modal-overlay {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.sources-modal {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add these CSS variables to your root styles */
+:root {
+  --primary-main: #3182ce;
+  --primary-light: rgba(49, 130, 206, 0.1);
+  --text-secondary: #718096;
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-main: #63b3ed;
+    --primary-light: rgba(99, 179, 237, 0.1);
+    --text-secondary: #a0aec0;
+  }
+} 

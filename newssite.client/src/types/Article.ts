@@ -24,6 +24,7 @@ export interface ArticleSource {
   url: string;
   name: string;
   credibilityScore: number;
+  title: LocalizedContent;
 }
 
 export interface Article {
@@ -47,4 +48,6 @@ export interface Article {
   };
   analysis?: string;
   processedAt: string;
+  sourceCount: number;
+  sources: ArticleSource[];
 } 
