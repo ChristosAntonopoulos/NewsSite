@@ -11,17 +11,6 @@ interface NewsCategoryStepEditorProps {
   onTransformationsChange: (transformations: TransformationConfig[]) => void;
 }
 
-const newsCategories = [
-  { value: 'technology', label: 'Technology' },
-  { value: 'business', label: 'Business' },
-  { value: 'science', label: 'Science' },
-  { value: 'health', label: 'Health' },
-  { value: 'sports', label: 'Sports' },
-  { value: 'entertainment', label: 'Entertainment' },
-  { value: 'politics', label: 'Politics' },
-  { value: 'world', label: 'World News' }
-];
-
 export function NewsCategoryStepEditor({
   parameters,
   transformations,
@@ -47,21 +36,13 @@ export function NewsCategoryStepEditor({
       </h2>
 
       <div className="space-y-1">
-        <label className="block text-sm font-medium text-gray-900 dark:text-gray-100">
-          Category
-        </label>
-        <select
+        <TextField
+          label="Category"
           value={parameters.category || ''}
           onChange={(e) => handleChange('category', e.target.value)}
-          className="block w-full px-3 py-2 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400"
-        >
-          <option value="">Select a category</option>
-          {newsCategories.map((category) => (
-            <option key={category.value} value={category.value}>
-              {category.label}
-            </option>
-          ))}
-        </select>
+          placeholder="Enter news category"
+          required
+        />
       </div>
 
       <div className="grid grid-cols-2 gap-4">

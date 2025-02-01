@@ -1,6 +1,6 @@
 export const API_CONFIG = {
     // If VITE_API_URL ends with /api, use it as is, otherwise append /api
-    BASE_URL: (import.meta.env.VITE_API_URL || 'http://localhost:5000'),
+    BASE_URL: (import.meta.env.VITE_API_URL || 'http://localhost:32769'),
     ENDPOINTS: {
         ARTICLES: '/articles',
         CATEGORIES: '/articles/categories',

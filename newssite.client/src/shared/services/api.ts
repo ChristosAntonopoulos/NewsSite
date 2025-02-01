@@ -49,7 +49,7 @@ console.log('Environment:', {
 });
 
 // Clean up any double /api occurrences in the base URL
-const rawBaseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+const rawBaseUrl = import.meta.env.VITE_API_URL || 'https://localhost:32769/api';
 const baseURL = rawBaseUrl.replace(/\/api\/api/g, '/api');
 
 // Log the final base URL

@@ -66,11 +66,21 @@ export const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
           <div className="news-card-meta">
             <span className="news-card-date">
               <FaClock className="icon" />
-              {formatDate(article.publishedAt)}
+              {formatDate(article.publishedAt)}             
             </span>
             <span className="news-card-sources">
-              <FaNewspaper className="icon" />
-              {article.sourceCount} {t('news.sources')}
+            <FaNewspaper className="icon" />
+              
+              
+              </span>
+              <span className="news-card-sources">
+                <span>
+
+                
+                {article.sourceCount}
+
+
+                </span>
             </span>
           </div>
 

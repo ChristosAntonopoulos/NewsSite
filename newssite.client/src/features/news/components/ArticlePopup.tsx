@@ -53,32 +53,34 @@ const ArticlePopup: React.FC<ArticlePopupProps> = ({
       className="sources-modal-overlay"
       onClick={() => setShowSources(false)}
       style={{ 
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         position: 'fixed',
         top: 0,
         left: 0,
         right: 0,
         bottom: 0,
-        zIndex: 1000,
+        backgroundColor: 'rgba(0, 0, 0, 0.75)',
+        zIndex: 9999,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
       }}
     >
       <div 
-        className="sources-modal"
         onClick={e => e.stopPropagation()}
         style={{
-          ...styles.paper,
-          maxWidth: '600px',
+          backgroundColor: theme.palette.mode === 'dark' ? '#1a202c' : '#ffffff',
+          borderRadius: '8px',
+          padding: '24px',
           width: '90%',
+          maxWidth: '600px',
           maxHeight: '80vh',
           overflow: 'auto',
-          position: 'relative'
+          position: 'relative',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+          border: `1px solid ${theme.palette.mode === 'dark' ? '#2d3748' : '#e2e8f0'}`
         }}
       >
         <button 
-          className="close-button"
           onClick={() => setShowSources(false)}
           style={{
             position: 'absolute',
@@ -87,30 +89,44 @@ const ArticlePopup: React.FC<ArticlePopupProps> = ({
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            color: 'inherit'
+            color: theme.palette.mode === 'dark' ? '#a0aec0' : '#718096',
+            padding: '8px'
           }}
         >
           <FaTimes />
         </button>
-        
-        <h3 style={styles.title}>{t('news.relatedSources')}</h3>
-        <p style={styles.subtitle}>{t('news.sourcesDescription')}</p>
-        
+
+        <h3 style={{
+          fontSize: '1.5rem',
+          fontWeight: 600,
+          marginBottom: '16px',
+          color: theme.palette.mode === 'dark' ? '#f7fafc' : '#2d3748'
+        }}>
+          {t('news.relatedSources')}
+        </h3>
+
         <div style={{ marginTop: '20px' }}>
           {article.sources.map((source, index) => (
             <div 
               key={index}
               style={{
-                ...styles.section,
+                padding: '16px',
                 marginBottom: '12px',
+                backgroundColor: theme.palette.mode === 'dark' ? '#2d3748' : '#f8f9fa',
+                border: `1px solid ${theme.palette.mode === 'dark' ? '#4a5568' : '#e2e8f0'}`,
+                borderRadius: '6px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center'
               }}
             >
               <div style={{ flex: 1 }}>
-                <p style={{ ...styles.title, fontSize: '1rem', marginBottom: '4px' }}>
-                  {source.title.en}
+                <p style={{ 
+                  fontSize: '1rem',
+                  fontWeight: 500,
+                  color: theme.palette.mode === 'dark' ? '#f7fafc' : '#2d3748'
+                }}>
+                  {source.name}
                 </p>
               </div>
               <a
@@ -118,12 +134,16 @@ const ArticlePopup: React.FC<ArticlePopupProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
-                  ...styles.addButton,
+                  padding: '8px 16px',
+                  backgroundColor: theme.palette.mode === 'dark' ? '#4a5568' : '#edf2f7',
+                  color: theme.palette.mode === 'dark' ? '#f7fafc' : '#2d3748',
+                  borderRadius: '4px',
                   textDecoration: 'none',
+                  fontSize: '0.875rem',
                   marginLeft: '16px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px'
+                  transition: 'all 0.2s ease',
+                  border: 'none',
+                  cursor: 'pointer'
                 }}
               >
                 {t('news.visitSource')}
@@ -199,7 +219,7 @@ const ArticlePopup: React.FC<ArticlePopupProps> = ({
                         style={{ color: getCredibilityColor(fact.confidence) }}
                       >
                         {getCredibilityIcon(fact.confidence)}
-                        <span>{Math.round(fact.confidence * 100)}%</span>
+                        <span>{Math.round(fact.confidence * 10)}%</span>
                       </div>
                     </div>
                   ))}

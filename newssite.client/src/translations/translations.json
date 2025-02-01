@@ -72,8 +72,8 @@
     "el": "Αποθήκευση Άρθρου"
   },
   "news.sources": {
-    "en": "Sources",
-    "el": "Πηγές"
+    "en": "sources",
+    "el": "πηγές"
   },
   "news.keyFacts": {
     "en": "Key Facts",
@@ -254,5 +254,17 @@
   "common.logout": {
     "en": "Logout",
     "el": "Αποσύνδεση"
+  },
+  "news.relatedSources": {
+    "en": "Related Sources",
+    "el": "Σχετικές Πηγές"
+  },
+  "news.sourcesDescription": {
+    "en": "This story has been covered by multiple news outlets:",
+    "el": "Αυτή η είδηση έχει καλυφθεί από πολλαπλά μέσα ενημέρωσης:"
+  },
+  "news.visitSource": {
+    "en": "Visit Source",
+    "el": "Επίσκεψη"
   }
 } 

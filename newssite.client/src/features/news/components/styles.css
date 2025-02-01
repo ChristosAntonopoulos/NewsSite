@@ -7,20 +7,90 @@
 }
 
 .sources-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--editor-border-light);
+  background-color: transparent;
+  color: var(--editor-text-secondary-light);
+  text-decoration: none;
+  font-size: 0.875rem;
   transition: all 0.2s ease;
 }
 
+.dark .sources-button {
+  border-color: var(--editor-border-dark);
+  color: var(--editor-text-secondary-dark);
+}
+
 .sources-button:hover {
-  color: var(--primary-main);
-  background-color: var(--primary-light);
+  background-color: var(--editor-surface-light);
+  color: var(--editor-text-primary-light);
+  border-color: var(--editor-primary-light);
+}
+
+.dark .sources-button:hover {
+  background-color: var(--editor-surface-dark);
+  color: var(--editor-text-primary-dark);
+  border-color: var(--editor-primary-dark);
+}
+
+.sources-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.sources-modal {
+  background-color: var(--editor-background-light);
+  border-radius: 8px;
+  padding: 24px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow: auto;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dark .sources-modal {
+  background-color: var(--editor-background-dark);
+}
+
+.sources-item {
+  background-color: var(--editor-surface-light);
+  border: 1px solid var(--editor-border-light);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.dark .sources-item {
+  background-color: var(--editor-surface-dark);
+  border-color: var(--editor-border-dark);
+}
+
+.sources-button:hover {
+  background-color: var(--editor-surface-light);
+  color: var(--editor-text-primary-light);
+  border-color: var(--editor-primary-light);
+}
+
+.sources-button:hover {
+  background-color: var(--editor-surface-light);
+  color: var(--editor-text-primary-light);
+  border-color: var(--editor-primary-light);
 }
 
 .sources-modal-overlay {
   animation: fadeIn 0.2s ease-out;
+  backdrop-filter: blur(4px);
 }
 
 .sources-modal {
@@ -43,18 +113,11 @@
   }
 }
 
-/* Add these CSS variables to your root styles */
-:root {
-  --primary-main: #3182ce;
-  --primary-light: rgba(49, 130, 206, 0.1);
-  --text-secondary: #718096;
-}
-
-/* Dark mode overrides */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --primary-main: #63b3ed;
-    --primary-light: rgba(99, 179, 237, 0.1);
-    --text-secondary: #a0aec0;
-  }
+.news-card-sources-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 12px;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
 } 
