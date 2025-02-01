@@ -107,6 +107,14 @@ namespace NewsSite.Server.Services.News
                             ? thumbElement.GetString() 
                             : "";
                         var publishedDate = DateTime.UtcNow;
+                        var relatedSources = await GetRelatedSources(title);
+
+                        // Skip if there aren't enough related sources
+                        if (relatedSources.Count < 3)
+                        {
+                            _logger.LogInformation($"Skipping article with insufficient related sources: {title}");
+                            continue;
+                        }
 
                         // Extract keywords using OpenAI
                         var keywords = await ExtractKeywords(title, snippet);
@@ -153,6 +161,8 @@ namespace NewsSite.Server.Services.News
                             allImages.Add(thumbnail);
                         }
 
+                        // Get related sources based on title
+                        
                         var article = new Article
                         {
                             Title = new LocalizedContent { En = enhancedContent.Title ?? "" },
@@ -167,6 +177,8 @@ namespace NewsSite.Server.Services.News
                             VerifiedFacts = verifiedFacts,
                             FeaturedImages = allImages,
                             Content = new LocalizedContent { En = enhancedContent.Summary ?? "", El = "" },
+                            Sources = relatedSources,
+                            SourceCount = relatedSources.Count,
                             Metadata = new Dictionary<string, string>  
                             {
                                 { "keywords", string.Join(",", keywords.ToString()) },
@@ -454,6 +466,95 @@ Example format:
                 _logger.LogError(ex, "Error generating news images with DALL-E");
                 return new List<string>();
             }
+        }
+
+        private async Task<List<ArticleSource>> GetRelatedSources(string title)
+        {
+            try
+            {
+                var searchParams = new SearchParameters
+                {
+                    Num = 20, // Limit to 5 related articles
+                    Engine = "google_news",
+                    AdditionalParameters = new Dictionary<string, string>
+                    {
+                        { "tbm", "nws" }
+                    }
+                };
+
+                var relatedResults = await _serpApiService.SearchAsync($"{title}", searchParams);
+                var sources = new List<ArticleSource>();
+
+                if (relatedResults.TryGetValue("news_results", out var resultsObj) && 
+                    resultsObj is JsonElement resultsElement && 
+                    resultsElement.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var result in resultsElement.EnumerateArray())
+                    {
+                        var relatedTitle = result.GetProperty("title").GetString();
+                        var relatedLink = result.GetProperty("link").GetString();
+                        
+                        // Calculate similarity between titles
+                        if (CalculateTitleSimilarity(title, relatedTitle) >= 0.6) // 60% similarity threshold
+                        {
+                            sources.Add(new ArticleSource
+                            {
+                                Title = new LocalizedContent { En = relatedTitle },
+                                Url = relatedLink
+                            });
+                        }
+                    }
+                }
+
+                return sources;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error fetching related sources for title: {Title}", title);
+                return new List<ArticleSource>();
+            }
+        }
+
+        private double CalculateTitleSimilarity(string title1, string title2)
+        {
+            // Normalize titles
+            title1 = title1.ToLower().Trim();
+            title2 = title2.ToLower().Trim();
+
+            if (string.IsNullOrEmpty(title1) || string.IsNullOrEmpty(title2))
+                return 0;
+
+            // Calculate Levenshtein distance
+            var distance = ComputeLevenshteinDistance(title1, title2);
+            var maxLength = Math.Max(title1.Length, title2.Length);
+            
+            // Convert distance to similarity score (0 to 1)
+            return 1 - ((double)distance / maxLength);
+        }
+
+        private int ComputeLevenshteinDistance(string s1, string s2)
+        {
+            var matrix = new int[s1.Length + 1, s2.Length + 1];
+
+            // Initialize first row and column
+            for (var i = 0; i <= s1.Length; i++)
+                matrix[i, 0] = i;
+            for (var j = 0; j <= s2.Length; j++)
+                matrix[0, j] = j;
+
+            // Fill rest of the matrix
+            for (var i = 1; i <= s1.Length; i++)
+            {
+                for (var j = 1; j <= s2.Length; j++)
+                {
+                    var cost = (s1[i - 1] == s2[j - 1]) ? 0 : 1;
+                    matrix[i, j] = Math.Min(
+                        Math.Min(matrix[i - 1, j] + 1, matrix[i, j - 1] + 1),
+                        matrix[i - 1, j - 1] + cost);
+                }
+            }
+
+            return matrix[s1.Length, s2.Length];
         }
     }
 

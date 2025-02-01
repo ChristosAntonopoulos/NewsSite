@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Article } from '../../../types/Article';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { format } from 'date-fns';
-import { FaRegBookmark, FaBookmark, FaShare, FaClock } from 'react-icons/fa';
+import { FaRegBookmark, FaBookmark, FaShare, FaClock, FaNewspaper } from 'react-icons/fa';
 import ArticlePopup from './ArticlePopup';
 import { useSavedArticles } from '../../../hooks/useSavedArticles';
 
@@ -67,6 +67,10 @@ export const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
             <span className="news-card-date">
               <FaClock className="icon" />
               {formatDate(article.publishedAt)}
+            </span>
+            <span className="news-card-sources">
+              <FaNewspaper className="icon" />
+              {article.sourceCount} {t('news.sources')}
             </span>
           </div>
 
