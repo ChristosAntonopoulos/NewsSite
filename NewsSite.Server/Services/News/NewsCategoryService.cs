@@ -112,7 +112,7 @@ namespace NewsSite.Server.Services.News
                         var keywords = await ExtractKeywords(title, snippet);
 
                         // Search for related news articles using keywords
-                        var additionalSources = await SearchRelatedNews(link);
+                        var additionalSources = await SearchRelatedNews(title);
 
                         // Check for similar articles in the last 3 days
                         if (await HasSimilarArticle(keywords.Keywords.ToList()))
@@ -505,7 +505,7 @@ Example format:
             }
         }
 
-        private async Task<List<ArticleSource>> SearchRelatedNews(string link)
+        private async Task<List<ArticleSource>> SearchRelatedNews(string title)
         {
             try
             {
@@ -520,10 +520,11 @@ Example format:
                 };
 
                 // Create a search query using the keywords
-                var searchQuery = "related:" + link;
+                var searchQuery = "related:" + title;
                 var searchResults = await _serpApiService.SearchAsync(searchQuery, searchParams);
 
                 var sources = new List<ArticleSource>();
+                const double TITLE_SIMILARITY_THRESHOLD = 0.4; // 40% similarity threshold
 
                 if (searchResults.TryGetValue("news_results", out var resultsObj) && 
                     resultsObj is JsonElement resultsElement && 
@@ -535,13 +536,27 @@ Example format:
                         {
                             var sourceUrl = result.GetProperty("link").GetString();
                             var sourceName = result.GetProperty("source").GetProperty("name").GetString();
+                            var sourceTitle = result.GetProperty("title").GetString();
 
-                            sources.Add(new ArticleSource
+                            // Calculate title similarity
+                            var titleSimilarity = CalculateTitleSimilarity(title, sourceTitle);
+                            
+                            _logger.LogInformation(
+                                $"Title similarity check - Original: {title}, Source: {sourceTitle}, " +
+                                $"Similarity: {titleSimilarity:P}"
+                            );
+
+                            // Only add sources with sufficient title similarity
+                            if (titleSimilarity >= TITLE_SIMILARITY_THRESHOLD)
                             {
-                                Url = sourceUrl,
-                                Name = sourceName,
-                                Type = "news"
-                            });
+                                sources.Add(new ArticleSource
+                                {
+                                    Url = sourceUrl,
+                                    Name = sourceName,
+                                    Type = "news",
+                                    Title = new LocalizedContent { En = sourceTitle }
+                                });
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -559,6 +574,31 @@ Example format:
                 _logger.LogError(ex, "Error searching for related news");
                 return new List<ArticleSource>();
             }
+        }
+
+        private double CalculateTitleSimilarity(string originalTitle, string sourceTitle)
+        {
+            if (string.IsNullOrWhiteSpace(originalTitle) || string.IsNullOrWhiteSpace(sourceTitle))
+                return 0;
+
+            // Normalize titles: convert to lowercase and split into words
+            var originalWords = originalTitle.ToLowerInvariant()
+                .Split(new[] { ' ', ',', '.', '!', '?', ';', ':', '-', '(', ')' }, 
+                    StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Where(w => w.Length > 3) // Only consider words longer than 3 characters
+                .ToList();
+
+            var sourceWords = sourceTitle.ToLowerInvariant()
+                .Split(new[] { ' ', ',', '.', '!', '?', ';', ':', '-', '(', ')' }, 
+                    StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Where(w => w.Length > 3) // Only consider words longer than 3 characters
+                .ToList();
+
+            // Count matching words
+            var matchingWords = originalWords.Intersect(sourceWords).Count();
+
+            // Calculate similarity ratio based on the longer title
+            return (double)matchingWords / Math.Max(originalWords.Count, sourceWords.Count);
         }
     }
 
