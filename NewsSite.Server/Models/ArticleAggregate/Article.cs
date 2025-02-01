@@ -84,6 +84,10 @@ namespace NewsSite.Server.Models.ArticleAggregate
 
         [BsonElement("Url")]
         public string Url { get; set; }
+
+        [BsonElement("Name")]
+        public string Name { get; set; }
+
     }
 
     [BsonIgnoreExtraElements]

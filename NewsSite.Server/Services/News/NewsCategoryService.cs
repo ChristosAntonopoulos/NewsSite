@@ -87,24 +87,46 @@ namespace NewsSite.Server.Services.News
                 resultsObj is JsonElement resultsElement && 
                 resultsElement.ValueKind == JsonValueKind.Array)
             {
-                foreach (var result in resultsElement.EnumerateArray().Take(5))
+                foreach (var result in resultsElement.EnumerateArray().Take(30))
                 {
                     try 
                     {
-                        var title = result.GetProperty("title").GetString();
+                        // Use TryGetProperty for all property accesses
+                        if (!result.TryGetProperty("title", out var titleElement) || 
+                            !result.TryGetProperty("link", out var linkElement) ||
+                            !result.TryGetProperty("source", out var sourceElement))
+                        {
+                            _logger.LogWarning("Required properties missing from search result");
+                            continue;
+                        }
+
+                        var title = titleElement.GetString() ?? "";
                         var snippet = result.TryGetProperty("snippet", out var snippetElement) 
-                            ? snippetElement.GetString() 
+                            ? snippetElement.GetString() ?? ""
                             : "";
-                        var link = result.GetProperty("link").GetString();
-                        var source = result.GetProperty("source");
-                        var sourceName = source.GetProperty("name").GetString();
-                        var sourceIcon = source.GetProperty("icon").GetString();
-                        var authors = source.GetProperty("authors").EnumerateArray()
-                            .Select(a => a.GetString())
-                            .Where(a => !string.IsNullOrEmpty(a))
-                            .ToList();
+                        var link = linkElement.GetString() ?? "";
+
+                        // Handle source properties safely
+                        var sourceName = sourceElement.TryGetProperty("name", out var nameElement) 
+                            ? nameElement.GetString() ?? "" 
+                            : "";
+                        var sourceIcon = sourceElement.TryGetProperty("icon", out var iconElement) 
+                            ? iconElement.GetString() ?? "" 
+                            : "";
+
+                        // Handle authors array safely
+                        var authors = new List<string>();
+                        if (sourceElement.TryGetProperty("authors", out var authorsElement) && 
+                            authorsElement.ValueKind == JsonValueKind.Array)
+                        {
+                            authors = authorsElement.EnumerateArray()
+                                .Select(a => a.GetString())
+                                .Where(a => !string.IsNullOrEmpty(a))
+                                .ToList();
+                        }
+
                         var thumbnail = result.TryGetProperty("thumbnail", out var thumbElement) 
-                            ? thumbElement.GetString() 
+                            ? thumbElement.GetString() ?? ""
                             : "";
                         var publishedDate = DateTime.UtcNow;
                         var relatedSources = await GetRelatedSources(title);
@@ -491,17 +513,34 @@ Example format:
                 {
                     foreach (var result in resultsElement.EnumerateArray())
                     {
-                        var relatedTitle = result.GetProperty("title").GetString();
-                        var relatedLink = result.GetProperty("link").GetString();
-                        
-                        // Calculate similarity between titles
-                        if (CalculateTitleSimilarity(title, relatedTitle) >= 0.6) // 60% similarity threshold
+                        try 
                         {
-                            sources.Add(new ArticleSource
+                            var relatedTitle = result.GetProperty("title").GetString();
+                            var relatedLink = result.GetProperty("link").GetString();
+                            
+                            // Get source name from the nested source object
+                            var sourceName = "";
+                            if (result.TryGetProperty("source", out var sourceObj) && 
+                                sourceObj.TryGetProperty("name", out var nameElement))
                             {
-                                Title = new LocalizedContent { En = relatedTitle },
-                                Url = relatedLink
-                            });
+                                sourceName = nameElement.GetString() ?? "";
+                            }
+
+                            // Calculate similarity between titles
+                            if (CalculateTitleSimilarity(title, relatedTitle) >= 0.6) // 60% similarity threshold
+                            {
+                                sources.Add(new ArticleSource
+                                {
+                                    Title = new LocalizedContent { En = relatedTitle },
+                                    Url = relatedLink,
+                                    Name = sourceName
+                                });
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError(ex, "Error processing related source");
+                            continue;
                         }
                     }
                 }
