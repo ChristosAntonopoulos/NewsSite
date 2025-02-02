@@ -7,7 +7,11 @@ import { useTheme as useAppTheme } from '../../../contexts/ThemeContext';
 import { editorColors } from '../../../shared/theme/editorTheme';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { useSavedArticles } from '../../../hooks/useSavedArticles';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useSharedArticle } from '../../../contexts/SharedArticleContext';
+import ArticlePopup from './ArticlePopup';
 import './NewsFeed.css';
+import { toast } from 'react-hot-toast';
 
 interface NewsFeedProps {
   mode?: 'all' | 'saved';
@@ -32,6 +36,10 @@ const NewsFeed: React.FC<NewsFeedProps> = ({ mode = 'all' }) => {
   const { t } = useLanguage();
   const { savedArticleIds } = useSavedArticles();
   const colors = editorColors[theme];
+  const { sharedArticleId, setSharedArticleId } = useSharedArticle();
+  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (mode === 'all') {
@@ -44,6 +52,29 @@ const NewsFeed: React.FC<NewsFeedProps> = ({ mode = 'all' }) => {
     setArticles([]);
     loadArticles(1);
   }, [selectedCategory, mode, savedArticleIds]);
+
+  useEffect(() => {
+    const handleSharedArticle = async () => {
+      const params = new URLSearchParams(location.search);
+      const articleId = params.get('article');
+      
+      if (articleId) {
+        try {
+          const article = await newsApi.articleById(articleId);
+          if (article) {
+            setSelectedArticle(article);
+          } else {
+            toast.error(t('news.articleNotFound'));
+          }
+        } catch (error) {
+          console.error('Error fetching shared article:', error);
+          toast.error(t('news.articleNotFound'));
+        }
+      }
+    };
+
+    handleSharedArticle();
+  }, [location.search]);
 
   const loadCategories = async () => {
     try {
@@ -149,6 +180,20 @@ const NewsFeed: React.FC<NewsFeedProps> = ({ mode = 'all' }) => {
             </div>
           )}
         </>
+      )}
+
+      {selectedArticle && (
+        <ArticlePopup
+          article={selectedArticle}
+          onClose={() => {
+            setSelectedArticle(null);
+            // Clear the URL parameter without navigation
+            window.history.replaceState({}, '', window.location.pathname);
+          }}
+          onSave={() => {/* your save handler */}}
+          onShare={() => {/* your share handler */}}
+          isSaved={false} // Use your actual saved state here
+        />
       )}
     </div>
   );

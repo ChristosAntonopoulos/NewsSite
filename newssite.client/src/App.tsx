@@ -6,22 +6,27 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { UserPreferences } from './features/auth/components/UserPreferences';
+import { SharedArticleProvider } from './contexts/SharedArticleContext';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient();
 
 function App() {
     return (
         <QueryClientProvider client={queryClient}>
-            <LanguageProvider>
-                <ThemeProvider>
-                    <AuthProvider>
-                        <UserPreferences />
-                        <div className="app">
-                            <RouterProvider router={router} />
-                        </div>
-                    </AuthProvider>
-                </ThemeProvider>
-            </LanguageProvider>
+            <SharedArticleProvider>
+                <Toaster position="bottom-right" />
+                <LanguageProvider>
+                    <ThemeProvider>
+                        <AuthProvider>
+                            <UserPreferences />
+                            <div className="app">
+                                <RouterProvider router={router} />
+                            </div>
+                        </AuthProvider>
+                    </ThemeProvider>
+                </LanguageProvider>
+            </SharedArticleProvider>
         </QueryClientProvider>
     );
 }

@@ -1,6 +1,7 @@
 import { Share } from 'lucide-react'
 import { NewsItem } from '../types'
 import { useLanguage } from '../../../contexts/LanguageContext'
+import { toast } from 'react-hot-toast'
 
 interface ShareButtonProps {
   item: NewsItem
@@ -10,15 +11,27 @@ export function ShareButton({ item }: ShareButtonProps) {
   const { t, language } = useLanguage()
 
   const handleShare = async () => {
+    // Create the share URL with article ID
+    const shareUrl = `${window.location.origin}?article=${item.id}`
+
     if (navigator.share) {
       try {
         await navigator.share({
           title: item.title[language],
           text: item.summary[language],
-          url: window.location.href,
+          url: shareUrl,
         })
       } catch (err) {
         console.error('Error sharing:', err)
+      }
+    } else {
+      // Fallback to clipboard copy
+      try {
+        await navigator.clipboard.writeText(shareUrl)
+        toast.success(t('news.linkCopied'))
+      } catch (err) {
+        console.error('Error copying to clipboard:', err)
+        toast.error(t('common.error'))
       }
     }
   }

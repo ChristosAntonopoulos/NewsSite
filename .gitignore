@@ -30,4 +30,14 @@ yarn-error.log*
 
 # OS
 .DS_Store
-Thumbs.db 
+Thumbs.db
+
+# Appsettings files
+**/appsettings.json
+**/appsettings.*.json
+**/appsettings.Development.json
+**/appsettings.Production.json
+**/appsettings.Staging.json
+
+# Keep appsettings template
+!**/appsettings.template.json 

@@ -132,9 +132,9 @@ namespace NewsSite.Server.Services.News
                         var relatedSources = await GetRelatedSources(title);
 
                         // Skip if there aren't enough related sources
-                        if (relatedSources.Count < 3)
+                        if (relatedSources.Count < 3  || relatedSources.Count > 15)
                         {
-                            _logger.LogInformation($"Skipping article with insufficient related sources: {title}");
+                            _logger.LogInformation($"Skipping article  related sources: {title} number of sources: {relatedSources.Count} ");
                             continue;
                         }
 
@@ -239,7 +239,7 @@ namespace NewsSite.Server.Services.News
         private async Task<List<VerifiedFact>> ExtractAndVerifyFacts(string title, string snippet)
         {
             var prompt = @"You are a combined fact-checker and credibility analyst.Analyze the following news article and extract key factual claims. 
-             Extract verifiable facts:
+             Extract the 3 more important verifiable facts:
   - Focus on concrete events, numbers, dates, and direct quotes.
   - Exclude opinions, predictions, or speculative content.
  1) Extract only verifiable facts—focus on concrete events, numbers, dates, direct quotes.  
@@ -323,7 +323,7 @@ Verified Facts: {factsJson}
 Example format:
 {{
     ""title"": ""[Unique and engaging title]"",
-    ""summary"": ""[400-500 word comprehensive summary in a single line]""
+    ""summary"": ""[100-150 word comprehensive summary in a single line]""
 }}";
 
             return await GetOpenAiJsonResponse<EnhancedContent>(prompt, 1000, 0.7f);

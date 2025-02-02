@@ -64,6 +64,10 @@ export class NewsApi extends ApiClient {
   async likeArticle(articleId: string): Promise<boolean> {
     return this.post<boolean>(`${API_CONFIG.ENDPOINTS.ARTICLES}/like`, { articleId });
   }
+  async articleById(articleId: string): Promise<Article> {
+    return  this.get<Article>(`${API_CONFIG.ENDPOINTS.ARTICLES}/${articleId}`, { articleId });
+    
+  } 
 }
 
 // Create a singleton instance

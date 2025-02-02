@@ -5,6 +5,8 @@ import { format } from 'date-fns';
 import { FaRegBookmark, FaBookmark, FaShare, FaClock, FaNewspaper } from 'react-icons/fa';
 import ArticlePopup from './ArticlePopup';
 import { useSavedArticles } from '../../../hooks/useSavedArticles';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 interface NewsCardProps {
   article: Article;
@@ -15,6 +17,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
   const [isSaved, setIsSaved] = useState(() => isArticleSaved(article.id));
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const { language, t } = useLanguage();
+  const navigate = useNavigate();
 
   const title = language === 'el' ? article.title.el : article.title.en;
   const summary = language === 'el' ? article.summary.el : article.summary.en;
@@ -30,15 +33,31 @@ export const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
     setIsSaved(!isSaved);
   };
 
-  const handleShare = (e?: React.MouseEvent) => {
+  const handleShare = async (e?: React.MouseEvent) => {
     e?.stopPropagation();
+    
+    // Create the share URL with article ID
+    const shareUrl = `${window.location.origin}?article=${article.id}`;
+    
     if (navigator.share) {
-      navigator.share({
-        title: title,
-        url: article.url[language] || article.url.en
-      });
+      try {
+        await navigator.share({
+          title: title,
+          text: summary,
+          url: shareUrl
+        });
+      } catch (error) {
+        console.error('Error sharing:', error);
+      }
     } else {
-      window.open(article.url[language] || article.url.en, '_blank');
+      // Fallback to clipboard copy
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        // Show a toast notification
+        toast.success(t('news.linkCopied'));
+      } catch (error) {
+        console.error('Error copying to clipboard:', error);
+      }
     }
   };
 

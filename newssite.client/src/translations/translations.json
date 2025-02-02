@@ -266,5 +266,13 @@
   "news.visitSource": {
     "en": "Visit Source",
     "el": "Επίσκεψη"
+  },
+  "news.linkCopied": {
+    "en": "Link copied to clipboard",
+    "el": "Ο σύνδεσμος αντιγράφηκε στο πρόχειρο"
+  },
+  "news.articleNotFound": {
+    "en": "Article not found",
+    "el": "Το άρθρο δεν βρέθηκε"
   }
 } 

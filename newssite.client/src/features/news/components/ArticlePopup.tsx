@@ -6,6 +6,8 @@ import { el } from 'date-fns/locale';
 import { FaTimes, FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaExternalLinkAlt, FaBookmark, FaShare, FaNewspaper } from 'react-icons/fa';
 import { useTheme } from '@mui/material/styles';
 import { getEditorStyles } from '../../../shared/theme/editorTheme';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 interface ArticlePopupProps {
   article: Article;
@@ -26,6 +28,7 @@ const ArticlePopup: React.FC<ArticlePopupProps> = ({
   const [showSources, setShowSources] = useState(false);
   const theme = useTheme();
   const styles = getEditorStyles(theme);
+  const navigate = useNavigate();
 
   const title = language === 'el' ? article.title.el : article.title.en;
   const summary = language === 'el' ? article.summary.el : article.summary.en;
@@ -155,6 +158,31 @@ const ArticlePopup: React.FC<ArticlePopupProps> = ({
     </div>
   );
 
+  const handleShare = async (e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    
+    const shareUrl = `${window.location.origin}?article=${article.id}`;
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: title,
+          text: summary,
+          url: shareUrl
+        });
+      } catch (error) {
+        console.error('Error sharing:', error);
+      }
+    } else {
+      try {
+        await navigator.clipboard.writeText(shareUrl);
+        toast.success(t('news.linkCopied'));
+      } catch (error) {
+        console.error('Error copying to clipboard:', error);
+      }
+    }
+  };
+
   return (
     <div className="article-popup-overlay" onClick={onClose}>
       <div className="article-popup" onClick={e => e.stopPropagation()}>
@@ -187,7 +215,7 @@ const ArticlePopup: React.FC<ArticlePopupProps> = ({
                 >
                   <FaBookmark /> {t(isSaved ? 'news.saved' : 'news.save')}
                 </button>
-                <button className="popup-action-button" onClick={onShare}>
+                <button className="popup-action-button" onClick={handleShare}>
                   <FaShare /> {t('news.share')}
                 </button>
                 <button 
