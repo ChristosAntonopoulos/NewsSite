@@ -6,10 +6,11 @@ import { toast } from 'react-hot-toast';
 interface SharePopupProps {
   title: string;
   url: string;
-  onClose: () => void;
+  onClose: (e?: React.MouseEvent) => void;
+  isInsideCard?: boolean;
 }
 
-export function SharePopup({ title, url, onClose }: SharePopupProps) {
+export function SharePopup({ title, url, onClose, isInsideCard = false }: SharePopupProps) {
   const { t } = useLanguage();
 
   const shareOptions = [
@@ -39,21 +40,41 @@ export function SharePopup({ title, url, onClose }: SharePopupProps) {
     }
   ];
 
-  const handleCopyLink = async () => {
+  const handleCopyLink = async (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    
     try {
-      await navigator.clipboard.writeText(url);
-      toast.success(t('news.linkCopied'));
+      // Try modern clipboard API first
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(url)
+        toast.success(t('news.linkCopied'))
+      } else {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea')
+        textArea.value = url
+        document.body.appendChild(textArea)
+        textArea.select()
+        document.execCommand('copy')
+        document.body.removeChild(textArea)
+        toast.success(t('news.linkCopied'))
+      }
     } catch (err) {
-      console.error('Error copying to clipboard:', err);
-      toast.error(t('news.shareError'));
+      console.error('Error copying to clipboard:', err)
+      toast.error(t('news.shareError'))
     }
-  };
+  }
 
   return (
     <div 
-      className="share-popup-overlay"
-      onClick={onClose}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+      className={`share-popup-overlay ${isInsideCard ? 'inside-card' : ''}`}
+      onClick={(e) => {
+        e.stopPropagation();
+        if (!isInsideCard) {
+          onClose(e);
+        }
+      }}
+      style={isInsideCard ? undefined : { backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
     >
       <div 
         className="share-popup"

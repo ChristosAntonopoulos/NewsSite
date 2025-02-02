@@ -677,7 +677,46 @@
   }
 }
 
-.share-popup-overlay {
+.share-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.share-popup-overlay.inside-card {
+  position: absolute;
+  top: -10px;
+  left: calc(100% + 10px);
+  transform: translateY(-100%);
+  width: 300px;
+  height: auto;
+  background: none;
+  pointer-events: auto;
+  z-index: 1000;
+}
+
+.share-popup-overlay.inside-card .share-popup {
+  position: relative;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.share-popup-overlay.inside-card .share-popup::after {
+  content: '';
+  position: absolute;
+  bottom: 15px;
+  left: -8px;
+  transform: none;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid white;
+}
+
+/* Prevent body scroll when popup is open */
+.share-popup-overlay:not(.inside-card) {
   position: fixed;
   top: 0;
   left: 0;

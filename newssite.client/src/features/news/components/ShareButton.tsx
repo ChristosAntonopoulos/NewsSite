@@ -19,12 +19,21 @@ export function ShareButton({ item, className = '' }: ShareButtonProps) {
   const [showSharePopup, setShowSharePopup] = useState(false)
 
   const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
     e.stopPropagation()
     setShowSharePopup(true)
   }
 
+  const handleClose = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault()
+      e.stopPropagation()
+    }
+    setShowSharePopup(false)
+  }
+
   return (
-    <>
+    <div className="share-button-container">
       <button
         className={`action-button ${className}`}
         onClick={handleClick}
@@ -36,10 +45,11 @@ export function ShareButton({ item, className = '' }: ShareButtonProps) {
       {showSharePopup && (
         <SharePopup
           title={item.title[language]}
-          url={`${window.location.origin}?article=${item.id}`}
-          onClose={() => setShowSharePopup(false)}
+          url={`${window.location.origin}/article/${item.id}`}
+          onClose={handleClose}
+          isInsideCard={true}
         />
       )}
-    </>
+    </div>
   )
 } 
