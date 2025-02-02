@@ -3,11 +3,12 @@ import { Article, VerifiedFact } from '../../../types/Article';
 import { useLanguage } from '../../../contexts/LanguageContext';
 import { format } from 'date-fns';
 import { el } from 'date-fns/locale';
-import { FaTimes, FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaExternalLinkAlt, FaBookmark, FaShare, FaNewspaper } from 'react-icons/fa';
+import { FaTimes, FaCheckCircle, FaExclamationTriangle, FaTimesCircle, FaExternalLinkAlt, FaBookmark, FaShare, FaNewspaper, FaRegBookmark } from 'react-icons/fa';
 import { useTheme } from '@mui/material/styles';
 import { getEditorStyles } from '../../../shared/theme/editorTheme';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { ShareButton } from './ShareButton';
 
 interface ArticlePopupProps {
   article: Article;
@@ -209,15 +210,18 @@ const ArticlePopup: React.FC<ArticlePopupProps> = ({
                 {formatDate(article.publishedAt)}
               </span>
               <div className="article-popup-actions">
-                <button
+                <button 
                   className={`popup-action-button ${isSaved ? 'saved' : ''}`}
                   onClick={onSave}
                 >
-                  <FaBookmark /> {t(isSaved ? 'news.saved' : 'news.save')}
+                  {isSaved ? <FaBookmark /> : <FaRegBookmark />} {t('news.saveArticle')}
                 </button>
-                <button className="popup-action-button" onClick={handleShare}>
-                  <FaShare /> {t('news.share')}
-                </button>
+                
+                <ShareButton 
+                  item={article} 
+                  className="popup-action-button"
+                />
+                
                 <button 
                   className="popup-action-button sources-button"
                   onClick={() => setShowSources(true)}

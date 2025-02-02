@@ -675,4 +675,59 @@
     width: 100%;
     justify-content: space-between;
   }
+}
+
+.share-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.share-popup {
+  width: 300px;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+.share-title {
+  color: #333;
+  font-size: 16px;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+
+.share-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.share-button {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 3px;
+  text-decoration: none;
+  color: white;
+  transition: opacity 0.2s;
+}
+
+.share-button:hover {
+  opacity: 0.9;
+}
+
+.share-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.share-name {
+  font-size: 14px;
 } 

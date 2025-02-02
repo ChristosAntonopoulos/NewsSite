@@ -7,6 +7,7 @@ import ArticlePopup from './ArticlePopup';
 import { useSavedArticles } from '../../../hooks/useSavedArticles';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import { ShareButton } from './ShareButton';
 
 interface NewsCardProps {
   article: Article;
@@ -110,19 +111,16 @@ export const NewsCard: React.FC<NewsCardProps> = ({ article }) => {
           <div className="news-card-footer">
             <div className="news-card-actions">
               <button
-                className={`action-button ${isSaved ? 'saved' : ''}`}
+                className="action-button"
                 onClick={handleSave}
                 title={t(isSaved ? 'news.saved' : 'news.save')}
               >
                 {isSaved ? <FaBookmark /> : <FaRegBookmark />}
               </button>
-              <button
+              <ShareButton 
+                item={article} 
                 className="action-button"
-                onClick={handleShare}
-                title={t('news.share')}
-              >
-                <FaShare />
-              </button>
+              />
             </div>
           </div>
         </div>

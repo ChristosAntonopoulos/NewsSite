@@ -278,5 +278,25 @@
   "news.shareError": {
     "en": "Unable to share or copy link",
     "el": "Αδυναμία κοινοποίησης ή αντιγραφής συνδέσμου"
+  },
+  "news.moreApps": {
+    "en": "Get more sharing apps from Store",
+    "el": "Λήψη περισσότερων εφαρμογών από το Store"
+  },
+  "news.shareNeedInfo": {
+    "en": "We need some more information.",
+    "el": "Χρειαζόμαστε ορισμένες πληροφορίες ακόμα."
+  },
+  "news.sharePeopleDesc": {
+    "en": "Select someone you share with frequently.",
+    "el": "Πατήστε για να επιλέξετε κάποιον με τον οποίο θέλετε να πραγματοποιείτε κοινή χρήση συχνά."
+  },
+  "news.shareNearbyTitle": {
+    "en": "Share with nearby devices",
+    "el": "Επιλέξτε για να ενεργοποιήσετε την κοινή χρήση γειτονικών συσκευών"
+  },
+  "news.shareNearbyDesc": {
+    "en": "Share with nearby devices using Bluetooth and Wi-Fi.",
+    "el": "Κάντε κοινή χρήση με κοντινή συσκευή, χρησιμοποιώντας Bluetooth και Wi-Fi."
   }
 } 
