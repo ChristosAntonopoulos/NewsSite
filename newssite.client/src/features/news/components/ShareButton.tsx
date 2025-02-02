@@ -45,7 +45,7 @@ export function ShareButton({ item, className = '' }: ShareButtonProps) {
       {showSharePopup && (
         <SharePopup
           title={item.title[language]}
-          url={`${window.location.origin}/article/${item.id}`}
+          url={`${window.location.origin}?article=${item.id}`}
           onClose={handleClose}
           isInsideCard={true}
         />
