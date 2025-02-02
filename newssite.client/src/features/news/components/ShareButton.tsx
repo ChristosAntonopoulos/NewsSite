@@ -25,13 +25,29 @@ export function ShareButton({ item }: ShareButtonProps) {
         console.error('Error sharing:', err)
       }
     } else {
-      // Fallback to clipboard copy
+      // Try modern clipboard API first
       try {
-        await navigator.clipboard.writeText(shareUrl)
-        toast.success(t('news.linkCopied'))
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(shareUrl)
+          toast.success(t('news.linkCopied'))
+        } else {
+          // Fallback to legacy clipboard method
+          const textArea = document.createElement('textarea')
+          textArea.value = shareUrl
+          document.body.appendChild(textArea)
+          textArea.select()
+          try {
+            document.execCommand('copy')
+            toast.success(t('news.linkCopied'))
+          } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err)
+            toast.error(t('news.shareError'))
+          }
+          document.body.removeChild(textArea)
+        }
       } catch (err) {
         console.error('Error copying to clipboard:', err)
-        toast.error(t('common.error'))
+        toast.error(t('news.shareError'))
       }
     }
   }

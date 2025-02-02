@@ -274,5 +274,9 @@
   "news.articleNotFound": {
     "en": "Article not found",
     "el": "Το άρθρο δεν βρέθηκε"
+  },
+  "news.shareError": {
+    "en": "Unable to share or copy link",
+    "el": "Αδυναμία κοινοποίησης ή αντιγραφής συνδέσμου"
   }
 } 
